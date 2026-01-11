@@ -2,6 +2,7 @@ package macieserafin.pjwstk.edu.pl.currencymonitor.api;
 
 import macieserafin.pjwstk.edu.pl.currencymonitor.currency.CurrencyRepository;
 import macieserafin.pjwstk.edu.pl.currencymonitor.currency.ExchangeRateRepository;
+import macieserafin.pjwstk.edu.pl.currencymonitor.currency.ExchangeRateService;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -10,30 +11,16 @@ import java.util.List;
 @RequestMapping("/api/rates")
 public class ExchangeRateController {
 
-    private final CurrencyRepository currencyRepository;
-    private final ExchangeRateRepository rateRepository;
+    private final ExchangeRateService exchangeRateService;
 
-    public ExchangeRateController(
-            CurrencyRepository currencyRepository,
-            ExchangeRateRepository rateRepository
-    ) {
-        this.currencyRepository = currencyRepository;
-        this.rateRepository = rateRepository;
+    public ExchangeRateController(ExchangeRateService exchangeRateService) {
+        this.exchangeRateService = exchangeRateService;
     }
 
-    @Cacheable("exchangeRates")
     @GetMapping("/{code}")
     public List<ExchangeRateDto> getRatesForCurrency(
             @PathVariable("code") String code
     ) {
-        System.out.println("FETCHING FROM DB for " + code);
-
-        var currency = currencyRepository.findByCode(code.toUpperCase())
-                .orElseThrow(() -> new IllegalArgumentException("Currency not found"));
-
-        return rateRepository.findByCurrencyOrderByDateDesc(currency)
-                .stream()
-                .map(r -> new ExchangeRateDto(r.getDate(), r.getRate()))
-                .toList();
+        return exchangeRateService.getRatesForCurrency(code);
     }
 }
