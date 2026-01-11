@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="bdaee139-ee82-409c-aeca-242662be15ae" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-app/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-app/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-app/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-app/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-app/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-app/src/main/java/macieserafin/pjwstk/edu/pl/currencymonitorapp/CurrencyMonitorApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-app/src/main/java/macieserafin/pjwstk/edu/pl/currencymonitorapp/NbpScheduler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-app/src/main/java/macieserafin/pjwstk/edu/pl/currencymonitorapp/api/CurrencyController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-app/src/main/java/macieserafin/pjwstk/edu/pl/currencymonitorapp/api/CurrencyDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-app/src/main/java/macieserafin/pjwstk/edu/pl/currencymonitorapp/api/ExchangeRateController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-app/src/main/java/macieserafin/pjwstk/edu/pl/currencymonitorapp/api/ExchangeRateDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-app/src/main/java/macieserafin/pjwstk/edu/pl/currencymonitorapp/config/CacheConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-app/src/main/java/macieserafin/pjwstk/edu/pl/currencymonitorapp/currency/ExchangeRateService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-app/src/main/java/macieserafin/pjwstk/edu/pl/currencymonitorapp/currency/ExchangeRateUpdateService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-app/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-app/src/test/java/macieserafin/pjwstk/edu/pl/currencymonitorapp/CurrencyMonitorAppApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-nbp-client/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-nbp-client/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-nbp-client/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-nbp-client/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-nbp-client/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-nbp-client/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-nbp-client/src/main/java/macieserafin/pjwstk/edu/pl/currencymonitornbpclient/NbpClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-nbp-client/src/main/java/macieserafin/pjwstk/edu/pl/currencymonitornbpclient/NbpClientConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-nbp-client/src/main/java/macieserafin/pjwstk/edu/pl/currencymonitornbpclient/dto/NbpRateDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-nbp-client/src/main/java/macieserafin/pjwstk/edu/pl/currencymonitornbpclient/dto/NbpTableDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-nbp-client/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-nbp-client/src/test/java/macieserafin/pjwstk/edu/pl/currencymonitornbpclient/CurrencyMonitorNbpClientApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-persistence/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-persistence/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-persistence/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-persistence/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-persistence/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-persistence/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-persistence/src/main/java/macieserafin/pjwstk/edu/pl/currencymonitorpersistence/ApiFetchLog.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-persistence/src/main/java/macieserafin/pjwstk/edu/pl/currencymonitorpersistence/ApiFetchLogRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-persistence/src/main/java/macieserafin/pjwstk/edu/pl/currencymonitorpersistence/currency/Currency.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-persistence/src/main/java/macieserafin/pjwstk/edu/pl/currencymonitorpersistence/currency/CurrencyRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-persistence/src/main/java/macieserafin/pjwstk/edu/pl/currencymonitorpersistence/currency/ExchangeRate.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-persistence/src/main/java/macieserafin/pjwstk/edu/pl/currencymonitorpersistence/currency/ExchangeRateRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-persistence/src/main/java/macieserafin/pjwstk/edu/pl/currencymonitorpersistence/currency/ObservedCurrency.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-persistence/src/main/java/macieserafin/pjwstk/edu/pl/currencymonitorpersistence/currency/ObservedCurrencyRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-persistence/src/main/java/macieserafin/pjwstk/edu/pl/currencymonitorpersistence/user/Role.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-persistence/src/main/java/macieserafin/pjwstk/edu/pl/currencymonitorpersistence/user/RoleRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-persistence/src/main/java/macieserafin/pjwstk/edu/pl/currencymonitorpersistence/user/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-persistence/src/main/java/macieserafin/pjwstk/edu/pl/currencymonitorpersistence/user/UserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-persistence/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/currency-monitor-persistence/src/test/java/macieserafin/pjwstk/edu/pl/currencymonitorpersistence/CurrencyMonitorPersistenceApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/~$ojekt na NBP API.docx" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;macieserafin&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/macieserafin/currency-monitor.git&quot;,
+    &quot;accountId&quot;: &quot;d5e3f121-85f3-4fba-a5f4-1c5e68487224&quot;
+  }
+}</component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="37qfk9XGXxabmvDYVYq8UwH5792" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.CurrencyMonitorApplication.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.CurrencyMonitorApplication (1).executor": "Run",
+    "Spring Boot.CurrencyMonitorApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/currency-monitor/currency-monitor",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "run.configurations.included.in.services": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\currency-monitor\currency-monitor-parent\currency-monitor-app\src\main\resources" />
+      <recent name="D:\currency-monitor\currency-monitor-parent\currency-monitor-app\src\main\java\macieserafin\pjwstk\edu\pl\currencymonitorapp" />
+      <recent name="D:\currency-monitor\currency-monitor-parent\currency-monitor-persistence\src\main\java\macieserafin\pjwstk\edu\pl\currencymonitorpersistence" />
+      <recent name="D:\currency-monitor\currency-monitor-parent\currency-monitor-persistence\src\main\java\macieserafin\pjwstk\edu\pl\currencymonitorpersistence\currency" />
+      <recent name="D:\currency-monitor\currency-monitor-parent\currency-monitor-nbp-client\src\main\java\macieserafin\pjwstk\edu\pl\currencymonitornbpclient\dto" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="KtorApplicationConfigurationType" />
+        <option value="MicronautRunConfigurationType" />
+        <option value="QuarkusRunConfigurationType" />
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.CurrencyMonitorApplication (1)">
+    <configuration name="CurrencyMonitorApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="macieserafin.pjwstk.edu.pl.currencymonitor.CurrencyMonitorApplication" />
+      <module name="currency-monitor" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="macieserafin.pjwstk.edu.pl.currencymonitor.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CurrencyMonitorAppApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="currency-monitor-app" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="macieserafin.pjwstk.edu.pl.currencymonitorapp.CurrencyMonitorAppApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CurrencyMonitorApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="currency-monitor-app" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="macieserafin.pjwstk.edu.pl.currencymonitorapp.CurrencyMonitorApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="macieserafin.pjwstk.edu.pl.currencymonitorapp.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CurrencyMonitorApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="currency-monitor-parent" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="macieserafin.pjwstk.edu.pl.currencymonitor.CurrencyMonitorApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CurrencyMonitorDomainApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="currency-monitor-domain" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="macieserafin.pjwstk.edu.pl.currencymonitordomain.CurrencyMonitorDomainApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CurrencyMonitorNbpClientApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="currency-monitor-nbp-client" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="macieserafin.pjwstk.edu.pl.currencymonitornbpclient.CurrencyMonitorNbpClientApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CurrencyMonitorPersistenceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="currency-monitor-persistence" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="macieserafin.pjwstk.edu.pl.currencymonitorpersistence.CurrencyMonitorPersistenceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CurrencyMonitorUserApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="currency-monitor-user" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="macieserafin.pjwstk.edu.pl.currencymonitoruser.CurrencyMonitorUserApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.CurrencyMonitorApplication (1)" />
+        <item itemvalue="Application.CurrencyMonitorApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bdaee139-ee82-409c-aeca-242662be15ae" name="Changes" comment="" />
+      <created>1767635662433</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1767635662433</updated>
+      <workItem from="1767635663561" duration="3708000" />
+      <workItem from="1767655910226" duration="2129000" />
+      <workItem from="1767694349015" duration="514000" />
+      <workItem from="1767695175446" duration="770000" />
+      <workItem from="1767902066284" duration="3235000" />
+      <workItem from="1768145331992" duration="933000" />
+      <workItem from="1768148920043" duration="1459000" />
+      <workItem from="1768154551684" duration="1063000" />
+      <workItem from="1768155633766" duration="904000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
