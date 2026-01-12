@@ -29,7 +29,7 @@ public class ExchangeRate {
     @JoinColumn(name = "currency_id", nullable = false)
     private Currency currency;
 
-    protected ExchangeRate() {}
+    public ExchangeRate() {}
 
     public ExchangeRate(Currency currency, BigDecimal rate, LocalDate date) {
         this.currency = currency;
@@ -51,5 +51,21 @@ public class ExchangeRate {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setRate(BigDecimal rate) {
+        this.rate = rate;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
     }
 }

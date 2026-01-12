@@ -22,7 +22,7 @@ public class Currency {
     @Column(nullable = false)
     private String name;
 
-    protected Currency() {}
+    public Currency() {}
 
     public Currency(String code, String name) {
         this.code = code;
@@ -39,5 +39,17 @@ public class Currency {
 
     public String getName() {
         return name;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

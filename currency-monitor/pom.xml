@@ -17,6 +17,7 @@
         <module>currency-monitor-app</module>
         <module>currency-monitor-persistence</module>
         <module>currency-monitor-nbp-client</module>
+        <module>currency-monitor-core</module>
     </modules>
 
     <!-- ========================= -->
@@ -48,6 +49,12 @@
             <dependency>
                 <groupId>pl.project</groupId>
                 <artifactId>currency-monitor-persistence</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>pl.project</groupId>
+                <artifactId>currency-monitor-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

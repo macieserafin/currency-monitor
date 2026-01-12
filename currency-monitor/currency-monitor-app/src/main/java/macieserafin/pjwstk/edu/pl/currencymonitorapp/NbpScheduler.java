@@ -1,22 +1,21 @@
 package macieserafin.pjwstk.edu.pl.currencymonitorapp;
 
-
-import macieserafin.pjwstk.edu.pl.currencymonitorapp.currency.ExchangeRateUpdateService;
+import macieserafin.pjwstk.edu.pl.currencymonitorcore.usecase.UpdateExchangeRatesUseCase;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
 public class NbpScheduler {
 
-    private final ExchangeRateUpdateService service;
+    private final UpdateExchangeRatesUseCase updateExchangeRatesUseCase;
 
-    public NbpScheduler(ExchangeRateUpdateService service) {
-        this.service = service;
+    public NbpScheduler(UpdateExchangeRatesUseCase updateExchangeRatesUseCase) {
+        this.updateExchangeRatesUseCase = updateExchangeRatesUseCase;
     }
 
-//    @Scheduled(cron = "0 0 * * * *") // co godzinee
+    //    @Scheduled(cron = "0 0 * * * *") // co godzinę
     @Scheduled(fixedDelay = 30000) // co 30s
     public void fetchRates() {
-        service.updateRates();
+        updateExchangeRatesUseCase.update();
     }
 }
