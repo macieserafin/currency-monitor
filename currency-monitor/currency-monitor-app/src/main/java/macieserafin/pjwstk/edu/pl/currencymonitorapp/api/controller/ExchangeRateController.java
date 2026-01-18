@@ -1,7 +1,7 @@
 package macieserafin.pjwstk.edu.pl.currencymonitorapp.api.controller;
 
 import macieserafin.pjwstk.edu.pl.currencymonitorapp.api.dto.ExchangeRateDto;
-import macieserafin.pjwstk.edu.pl.currencymonitorapp.currency.ExchangeRateService;
+import macieserafin.pjwstk.edu.pl.currencymonitorapp.service.ExchangeRateService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

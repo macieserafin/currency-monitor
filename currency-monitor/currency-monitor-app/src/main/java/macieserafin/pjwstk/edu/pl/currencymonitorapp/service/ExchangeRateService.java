@@ -1,4 +1,4 @@
-package macieserafin.pjwstk.edu.pl.currencymonitorapp.currency;
+package macieserafin.pjwstk.edu.pl.currencymonitorapp.service;
 
 import macieserafin.pjwstk.edu.pl.currencymonitorapp.api.dto.ExchangeRateDto;
 import macieserafin.pjwstk.edu.pl.currencymonitorapp.api.exception.CurrencyNotFoundException;
