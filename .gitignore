@@ -1,0 +1,33 @@
+# Java / Maven
+target/
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Node / Vite
+node_modules/
+dist/
+build/
+coverage/
+
+# Logs and temporary files
+logs/
+*.log
+tmp/
+temp/
+
+# IDEs and editors
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
