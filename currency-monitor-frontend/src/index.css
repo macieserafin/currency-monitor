@@ -1,14 +1,80 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #30364f;
-
+  font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+  color: #22352d;
+  background: #f7f8f4;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  line-height: 1.5;
+  color-scheme: light;
+  --green: #237253;
+  --ink: #22352d;
+  --muted: #737d75;
+  --line: #e5e9e1;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  min-width: 360px;
+}
+button,
+input,
+select {
+  font: inherit;
+}
+button,
+a,
+input,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+button {
+  cursor: pointer;
+  color: inherit;
+}
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+a {
+  color: inherit;
+}
+button,
+input,
+select {
+  transition:
+    border-color 0.15s,
+    background 0.15s,
+    color 0.15s,
+    box-shadow 0.15s;
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid #70ad8e;
+  outline-offset: 3px;
+}
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+h1,
+h2,
+h3 {
+  font-weight: 600;
+}
+button svg,
+span > svg {
+  flex-shrink: 0;
+}
+::selection {
+  background: #cee6b3;
+  color: #22352d;
 }

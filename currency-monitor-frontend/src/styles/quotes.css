@@ -1,0 +1,118 @@
+.quote-cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.quote-card {
+  text-align: left;
+  border: 1px solid var(--line);
+  padding: 20px;
+  border-radius: 11px;
+  background: #fff;
+  position: relative;
+  box-shadow: 0 3px 8px #253a2003;
+}
+.quote-card:hover {
+  border-color: #b1c59f;
+  background: #fcfdf9;
+  transform: translateY(-2px);
+}
+.quote-card.chosen {
+  background: #f0f5e6;
+  border-color: #cad9b2;
+}
+.quote-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.currency-symbol {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 37px;
+  height: 37px;
+  background: #f0efea;
+  color: #8d7854;
+  font-family: Georgia, serif;
+  font-size: 23px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.symbol-eur {
+  background: #e2ecca;
+  color: #557548;
+}
+.symbol-usd {
+  background: #e7f0ed;
+  color: #527966;
+}
+.symbol-gbp {
+  background: #efebf4;
+  color: #7e6a99;
+}
+.symbol-chf {
+  background: #fbede6;
+  color: #b2735e;
+}
+.quote-identity {
+  min-width: 0;
+}
+.quote-identity strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+}
+.quote-identity strong span {
+  color: #68785e;
+  font-size: 10px;
+  font-weight: 400;
+  margin-left: 5px;
+}
+.quote-identity small {
+  display: block;
+  font-size: 10px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 135px;
+}
+.quote-top > svg {
+  margin-left: auto;
+  color: #97a18f;
+  transform: rotate(-40deg);
+}
+.quote-number {
+  font-size: clamp(22px, 2.2vw, 30px);
+  letter-spacing: -0.9px;
+  font-weight: 600;
+  margin: 20px 0 12px;
+  font-variant-numeric: tabular-nums;
+}
+.quote-number > span {
+  font-size: 11px;
+  color: #68785e;
+  font-weight: 400;
+  letter-spacing: 0;
+  margin-left: 7px;
+}
+.quote-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+  color: #68785e;
+  font-size: 10px;
+}
+.quote-bottom > span:last-child {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.tiny-dot {
+  width: 4px;
+  height: 4px;
+  background: #91a879;
+  border-radius: 50%;
+}

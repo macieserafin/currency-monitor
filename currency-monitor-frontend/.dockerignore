@@ -1,0 +1,12 @@
+node_modules/
+dist/
+coverage/
+test-results/
+playwright-report/
+tests/
+playwright.config.ts
+.env
+.env.*
+.idea/
+.git/
+*.log
