@@ -35,14 +35,17 @@ exec "$@"
         self.command("flock", "#!/usr/bin/env bash\nexit 0\n")
         self.command("curl", "#!/usr/bin/env bash\nexit 0\n")
         self.command("docker", """#!/usr/bin/env python3
-import json, os, pathlib, sys
+import base64, json, os, pathlib, sys
 args = sys.argv[1:]
 with open(os.environ['COMMAND_LOG'], 'a') as log:
     log.write(json.dumps({'args': args, 'tag': os.getenv('IMAGE_TAG')}) + '\\n')
 if 'login' in args:
-    sys.stdin.read()
+    sys.exit('Simulated Docker Snap credential write permission denied')
+if 'pull' in args:
     auth_dir = pathlib.Path(args[args.index('--config') + 1])
-    (auth_dir / 'config.json').write_text('temporary credentials')
+    config = json.loads((auth_dir / 'config.json').read_text())
+    assert base64.b64decode(config['auths']['ghcr.io']['auth']) == b'test-user:temporary-token'
+    assert (auth_dir / 'config.json').stat().st_mode & 0o777 == 0o600
 if 'pull' in args and os.getenv('FAIL_PULL'):
     sys.exit(1)
 if 'up' in args and os.getenv('FAIL_UP') and os.getenv('IMAGE_TAG') == os.environ['NEW_SHA']:

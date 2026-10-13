@@ -20,7 +20,7 @@ exec 9>"$app_root/deploy.lock"
 flock -w 600 9
 
 auth_dir="$(mktemp -d "$app_root/docker-auth.XXXXXX")"
-trap 'sudo -n rm -rf -- "$auth_dir"' EXIT
+trap 'rm -rf -- "$auth_dir"' EXIT
 export IMAGE_TAG="$image_tag"
 
 compose() {
@@ -31,9 +31,12 @@ compose() {
 
 compose config --quiet
 printf '%s\n' "$IMAGE_NAMESPACE" > "$release_dir/image-namespace"
+# Create credentials as the directory owner. A sudo-run Docker Snap may be
+# unable to write into another user's home even when Unix permissions allow it.
 # The short-lived GITHUB_TOKEN is supplied on stdin, never as a CLI argument.
-sudo -n docker --config "$auth_dir" login ghcr.io \
-    --username "$registry_user" --password-stdin
+registry_auth="$( { printf '%s:' "$registry_user"; cat; } | base64 | tr -d '\r\n')"
+printf '{"auths":{"ghcr.io":{"auth":"%s"}}}\n' "$registry_auth" > "$auth_dir/config.json"
+unset registry_auth
 compose pull
 
 previous_release=""

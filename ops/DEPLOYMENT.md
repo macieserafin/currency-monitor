@@ -212,8 +212,11 @@ akceptuje nowego klucza automatycznie.
 
 `GITHUB_TOKEN` jest tworzony automatycznie przez GitHub. Workflow ma uprawnienia do
 publikowania obrazów, a zadanie wdrożenia ma dostęp do ich odczytu. Krótkotrwały token
-trafia na VPS przez stdin, a tymczasowa konfiguracja logowania do GHCR jest usuwana
-po zakończeniu skryptu. Nie potrzebujesz dodatkowego PAT.
+trafia na VPS przez stdin. Skrypt zapisuje tymczasowy plik dostępu do GHCR jako
+użytkownik wdrożeniowy (uprawnienia 600); Docker odczytuje go podczas pobierania
+obrazów. Plik jest usuwany po zakończeniu skryptu. Pozwala to uniknąć zapisywania
+danych przez Docker Snap uruchomiony jako root w katalogu innego użytkownika.
+Nie potrzebujesz dodatkowego PAT.
 
 Jeśli obrazy o tych nazwach istnieją już w GHCR, sprawdź ich **Manage Actions access**
 i przyznaj repozytorium dostęp. Pakiety nowo publikowane przez ten workflow są

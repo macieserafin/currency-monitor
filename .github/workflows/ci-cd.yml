@@ -154,6 +154,23 @@ jobs:
           : "${VPS_USER:?Missing VPS_USER}"
           : "${VPS_SSH_KEY:?Missing VPS_SSH_KEY}"
           : "${VPS_KNOWN_HOSTS:?Missing VPS_KNOWN_HOSTS}"
+          trim_value() {
+            local value="$1"
+            value="${value#"${value%%[![:space:]]*}"}"
+            value="${value%"${value##*[![:space:]]}"}"
+            printf '%s' "$value"
+          }
+          VPS_USER="$(trim_value "$VPS_USER")"
+          VPS_HOST="$(trim_value "$VPS_HOST")"
+          if [[ ! "$VPS_USER" =~ ^[a-z_][a-z0-9_-]*[$]?$ ]]; then
+            echo 'Invalid VPS_USER: enter only the Linux username, without spaces, hostname or SSH command.' >&2
+            exit 1
+          fi
+          if [[ ! "$VPS_HOST" =~ ^[a-zA-Z0-9.:_-]+$ ]]; then
+            echo 'Invalid VPS_HOST: enter only the server IP or hostname, without spaces or a URL scheme.' >&2
+            exit 1
+          fi
+          printf 'VPS_USER=%s\nVPS_HOST=%s\n' "$VPS_USER" "$VPS_HOST" >> "$GITHUB_ENV"
           install -m 700 -d ~/.ssh
           printf '%s\n' "$VPS_SSH_KEY" > ~/.ssh/id_ed25519
           printf '%s\n' "$VPS_KNOWN_HOSTS" > ~/.ssh/known_hosts
