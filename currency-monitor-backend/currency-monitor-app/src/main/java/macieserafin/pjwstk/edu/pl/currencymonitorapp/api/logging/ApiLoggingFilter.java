@@ -28,12 +28,10 @@ public class ApiLoggingFilter extends OncePerRequestFilter {
 
         String method = request.getMethod();
         String uri = request.getRequestURI();
-        String query = request.getQueryString();
-
-        log.info("➡️ API REQUEST: {} {}{}",
+        // Query parameters may contain credentials or personal data.
+        log.info("➡️ API REQUEST: {} {}",
                 method,
-                uri,
-                query != null ? "?" + query : ""
+                uri
         );
 
         try {

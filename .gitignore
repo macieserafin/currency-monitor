@@ -13,6 +13,10 @@ playwright-report/
 __pycache__/
 
 # Logs and temporary files
+~$*
+*.dump
+backups/
+docker-auth.*/
 logs/
 *.log
 tmp/
@@ -36,5 +40,6 @@ Thumbs.db
 Desktop.ini
 
 # Private deployment notes and server configuration
+/private-docs/
 ops/*.local.md
 ops/nginx/*.local.conf

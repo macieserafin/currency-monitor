@@ -1,0 +1,2 @@
+# Deployment scripts must remain executable by bash after a Windows checkout.
+ops/*.sh text eol=lf

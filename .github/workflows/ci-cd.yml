@@ -42,7 +42,7 @@ jobs:
           cache-dependency-path: currency-monitor-backend/**/pom.xml
       - name: Tests and coverage
         working-directory: currency-monitor-backend
-        run: ./mvnw -B verify
+        run: bash ./mvnw -B verify
 
   frontend:
     runs-on: ubuntu-24.04
