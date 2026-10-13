@@ -1,0 +1,176 @@
+name: CI and deployment
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: currency-monitor-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  operations:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      IMAGE_NAMESPACE: example-owner
+      IMAGE_TAG: validation
+      POSTGRES_DB: currency_monitor
+      POSTGRES_USER: currency_monitor
+      POSTGRES_PASSWORD: temporary-ci-database-password
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash -n ops/deploy.sh ops/backup.sh
+      - run: python3 -m unittest discover -s ops/tests -v
+      - run: docker compose -f compose.prod.yml config --quiet
+
+  backend:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+          cache-dependency-path: currency-monitor-backend/**/pom.xml
+      - name: Tests and coverage
+        working-directory: currency-monitor-backend
+        run: ./mvnw -B verify
+
+  frontend:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: currency-monitor-frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: currency-monitor-frontend/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+
+  images:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: [operations, backend, frontend]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      packages: write
+    strategy:
+      matrix:
+        component: [backend, frontend]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - name: Set image namespace
+        run: echo "IMAGE_NAMESPACE=${GITHUB_REPOSITORY_OWNER,,}" >> "$GITHUB_ENV"
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: ./currency-monitor-${{ matrix.component }}
+          push: true
+          platforms: linux/amd64
+          tags: ghcr.io/${{ env.IMAGE_NAMESPACE }}/currency-monitor-${{ matrix.component }}:${{ github.sha }}
+          labels: org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+          cache-from: type=gha,scope=${{ matrix.component }}
+          cache-to: type=gha,mode=max,scope=${{ matrix.component }}
+
+  smoke:
+    needs: images
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      packages: read
+    env:
+      IMAGE_TAG: ${{ github.sha }}
+      POSTGRES_DB: currency_monitor
+      POSTGRES_USER: currency_monitor
+      POSTGRES_PASSWORD: temporary-ci-database-password
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set image namespace
+        run: echo "IMAGE_NAMESPACE=${GITHUB_REPOSITORY_OWNER,,}" >> "$GITHUB_ENV"
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Start production stack and check migrations and API
+        run: |
+          docker compose -p currency-monitor-smoke -f compose.prod.yml up -d --wait --wait-timeout 240
+          curl -fsS --max-time 15 http://127.0.0.1:3000/ > /dev/null
+          curl -fsS --max-time 15 http://127.0.0.1:3000/api/currencies > /dev/null
+      - name: Show logs on failure
+        if: failure()
+        run: docker compose -p currency-monitor-smoke -f compose.prod.yml logs --tail=100
+      - name: Remove CI containers and test database
+        if: always()
+        run: docker compose -p currency-monitor-smoke -f compose.prod.yml down -v
+
+  deploy:
+    needs: smoke
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    environment: production
+    permissions:
+      contents: read
+      packages: read
+    env:
+      PUBLIC_URL: ${{ vars.PUBLIC_URL }}
+      VPS_HOST: ${{ secrets.VPS_HOST }}
+      VPS_USER: ${{ secrets.VPS_USER }}
+      VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+      VPS_KNOWN_HOSTS: ${{ secrets.VPS_KNOWN_HOSTS }}
+      RELEASE_SHA: ${{ github.sha }}
+      REGISTRY_USER: ${{ github.actor }}
+      REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure SSH
+        shell: bash
+        run: |
+          set -euo pipefail
+          : "${PUBLIC_URL:?Set the PUBLIC_URL GitHub Actions variable}"
+          [[ "$PUBLIC_URL" == https://* ]]
+          : "${VPS_HOST:?Missing VPS_HOST}"
+          : "${VPS_USER:?Missing VPS_USER}"
+          : "${VPS_SSH_KEY:?Missing VPS_SSH_KEY}"
+          : "${VPS_KNOWN_HOSTS:?Missing VPS_KNOWN_HOSTS}"
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$VPS_SSH_KEY" > ~/.ssh/id_ed25519
+          printf '%s\n' "$VPS_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/id_ed25519 ~/.ssh/known_hosts
+      - name: Upload release and deploy
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          target="$VPS_USER@$VPS_HOST"
+          tar -czf - compose.prod.yml ops/deploy.sh ops/backup.sh |
+            ssh -o BatchMode=yes -o StrictHostKeyChecking=yes "$target" \
+              "umask 077; mkdir -p ~/currency-monitor/releases/$RELEASE_SHA; tar -xzf - -C ~/currency-monitor/releases/$RELEASE_SHA"
+          printf '%s' "$REGISTRY_TOKEN" |
+            ssh -o BatchMode=yes -o StrictHostKeyChecking=yes "$target" \
+              "bash ~/currency-monitor/releases/$RELEASE_SHA/ops/deploy.sh '$RELEASE_SHA' '$REGISTRY_USER' '${GITHUB_REPOSITORY_OWNER,,}'"
+      - name: Check public website and API
+        run: |
+          curl -fsS --retry 5 --retry-delay 5 --max-time 20 "${PUBLIC_URL%/}/" > /dev/null
+          curl -fsS --retry 5 --retry-delay 5 --max-time 20 "${PUBLIC_URL%/}/api/currencies" > /dev/null

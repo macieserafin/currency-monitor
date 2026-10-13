@@ -10,6 +10,7 @@ build/
 coverage/
 test-results/
 playwright-report/
+__pycache__/
 
 # Logs and temporary files
 logs/
@@ -33,3 +34,7 @@ temp/
 .DS_Store
 Thumbs.db
 Desktop.ini
+
+# Private deployment notes and server configuration
+ops/*.local.md
+ops/nginx/*.local.conf

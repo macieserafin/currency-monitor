@@ -1,5 +1,7 @@
 # Currency Monitor
 
+Production deployment to the VPS and GitHub Actions setup: [deployment guide](ops/DEPLOYMENT.md).
+
 Currency Monitor is a backend-oriented Java application designed to automatically fetch,
 process, and store foreign exchange rates from the official National Bank of Poland (NBP) API.
 The project focuses on clean architecture, modular design, and real-world backend concepts

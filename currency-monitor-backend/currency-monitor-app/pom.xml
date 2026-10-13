@@ -20,6 +20,11 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+
         <!-- INTERNAL MODULES -->
         <dependency>
             <groupId>pl.project</groupId>
