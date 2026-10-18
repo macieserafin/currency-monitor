@@ -65,9 +65,9 @@ if 'up' in args and os.getenv('FAIL_UP') and os.getenv('IMAGE_TAG') == os.enviro
         (self.root / "current").symlink_to(previous)
         return previous
 
-    def run_deploy(self, **env):
+    def run_deploy(self, script=None, **env):
         result = subprocess.run(
-            ["bash", str(self.release / "ops" / "deploy.sh"), NEW_SHA, "test-user", "example-owner"],
+            ["bash", str(script or self.release / "ops" / "deploy.sh"), NEW_SHA, "test-user", "example-owner"],
             input="temporary-token", text=True, capture_output=True,
             env=dict(self.env, **env), timeout=10,
         )
@@ -81,6 +81,18 @@ if 'up' in args and os.getenv('FAIL_UP') and os.getenv('IMAGE_TAG') == os.enviro
         result = self.run_deploy()
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual((self.root / "current").resolve(), self.release)
+
+    def test_environment_can_live_in_config_directory(self):
+        (self.root / "config").mkdir()
+        (self.root / ".env").rename(self.root / "config" / ".env")
+        (self.root / ".env").symlink_to("config/.env")
+        result = self.run_deploy()
+        self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_running_through_current_uses_physical_release_path(self):
+        (self.root / "current").symlink_to(self.release)
+        result = self.run_deploy(script=self.root / "current" / "ops" / "deploy.sh")
+        self.assertEqual(result.returncode, 0, result.stderr)
 
     def test_failed_start_restores_previous_release_and_reports_failure(self):
         previous = self.previous()

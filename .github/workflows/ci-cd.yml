@@ -183,10 +183,10 @@ jobs:
           target="$VPS_USER@$VPS_HOST"
           tar -czf - compose.prod.yml ops/deploy.sh ops/backup.sh |
             ssh -o BatchMode=yes -o StrictHostKeyChecking=yes "$target" \
-              "umask 077; mkdir -p ~/currency-monitor/releases/$RELEASE_SHA; tar -xzf - -C ~/currency-monitor/releases/$RELEASE_SHA"
+              "umask 077; mkdir -p ~/apps/currency-monitor/releases/$RELEASE_SHA; tar -xzf - -C ~/apps/currency-monitor/releases/$RELEASE_SHA"
           printf '%s' "$REGISTRY_TOKEN" |
             ssh -o BatchMode=yes -o StrictHostKeyChecking=yes "$target" \
-              "bash ~/currency-monitor/releases/$RELEASE_SHA/ops/deploy.sh '$RELEASE_SHA' '$REGISTRY_USER' '${GITHUB_REPOSITORY_OWNER,,}'"
+              "bash ~/apps/currency-monitor/releases/$RELEASE_SHA/ops/deploy.sh '$RELEASE_SHA' '$REGISTRY_USER' '${GITHUB_REPOSITORY_OWNER,,}'"
       - name: Check public website and API
         run: |
           curl -fsS --retry 5 --retry-delay 5 --max-time 20 "${PUBLIC_URL%/}/" > /dev/null

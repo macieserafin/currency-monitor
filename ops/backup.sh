@@ -2,8 +2,8 @@
 set -Eeuo pipefail
 umask 077
 
-release_dir="$(cd "$(dirname "$0")/.." && pwd)"
-app_root="$(cd "$release_dir/../.." && pwd)"
+release_dir="$(cd "$(dirname "$0")/.." && pwd -P)"
+app_root="$(cd "$release_dir/../.." && pwd -P)"
 export IMAGE_NAMESPACE="$(cat "$release_dir/image-namespace")"
 export IMAGE_TAG="$(basename "$release_dir")"
 mkdir -p "$app_root/backups"

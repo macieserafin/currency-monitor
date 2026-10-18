@@ -44,14 +44,14 @@ tylko frontend na `127.0.0.1:3000`; PostgreSQL i backend nie publikują portów 
 Jako użytkownik wdrożeniowy na VPS zainicjalizuj nową instalację:
 
 ```bash
-mkdir -p ~/currency-monitor/releases
-chmod 700 ~/currency-monitor
+mkdir -p ~/apps/currency-monitor/releases
+chmod 700 ~/apps/currency-monitor
 (
   umask 077
   set -eC
   db_password=$(openssl rand -hex 32)
   printf 'POSTGRES_DB=currency_monitor\nPOSTGRES_USER=currency_monitor\nPOSTGRES_PASSWORD=%s\n' \
-    "$db_password" > ~/currency-monitor/.env
+    "$db_password" > ~/apps/currency-monitor/.env
 )
 ```
 
@@ -96,17 +96,17 @@ obrazów ma działać. Rollback obrazów nie cofa zmian bazy.
 Po wdrożeniu utwórz backup:
 
 ```bash
-bash ~/currency-monitor/current/ops/backup.sh
+bash ~/apps/currency-monitor/current/ops/backup.sh
 ```
 
-Skrypt zapisuje dump PostgreSQL w `~/currency-monitor/backups`. Retencja
+Skrypt zapisuje dump PostgreSQL w `~/apps/currency-monitor/backups`. Retencja
 i kopiowanie poza serwer nie są automatyczne. Zaplanuj backupy, monitoruj dysk
 i osobno przetestuj odtwarzanie. Na produkcji nie wykonuj `docker compose down -v`.
 
 Logi na serwerze:
 
 ```bash
-cd ~/currency-monitor
+cd ~/apps/currency-monitor
 export IMAGE_TAG=$(basename "$(readlink -f current)")
 export IMAGE_NAMESPACE=$(cat current/image-namespace)
 sudo --preserve-env=IMAGE_TAG,IMAGE_NAMESPACE docker compose --env-file .env \
@@ -116,10 +116,10 @@ sudo --preserve-env=IMAGE_TAG,IMAGE_NAMESPACE docker compose --env-file .env \
 ### Ręczny rollback
 
 Aby przywrócić zachowane wydanie na VPS, ustaw `old_sha` na 40-znakowy SHA commita
-z `~/currency-monitor/releases` i wykonaj:
+z `~/apps/currency-monitor/releases` i wykonaj:
 
 ```bash
-cd ~/currency-monitor
+cd ~/apps/currency-monitor
 old_sha=REPLACE_WITH_PREVIOUS_RELEASE_SHA
 (
   flock -w 600 9
@@ -186,14 +186,14 @@ and the backend do not publish host ports.
 As the deployment user on the VPS, initialize a new installation:
 
 ```bash
-mkdir -p ~/currency-monitor/releases
-chmod 700 ~/currency-monitor
+mkdir -p ~/apps/currency-monitor/releases
+chmod 700 ~/apps/currency-monitor
 (
   umask 077
   set -eC
   db_password=$(openssl rand -hex 32)
   printf 'POSTGRES_DB=currency_monitor\nPOSTGRES_USER=currency_monitor\nPOSTGRES_PASSWORD=%s\n' \
-    "$db_password" > ~/currency-monitor/.env
+    "$db_password" > ~/apps/currency-monitor/.env
 )
 ```
 
@@ -239,17 +239,17 @@ if image rollback is expected to work. Image rollback does not undo database cha
 After deployment, create a backup:
 
 ```bash
-bash ~/currency-monitor/current/ops/backup.sh
+bash ~/apps/currency-monitor/current/ops/backup.sh
 ```
 
-The script writes a PostgreSQL dump to `~/currency-monitor/backups`. Retention and
+The script writes a PostgreSQL dump to `~/apps/currency-monitor/backups`. Retention and
 off-server replication are not automated. Schedule backups, monitor disk space
 and test restores separately. Do not run `docker compose down -v` in production.
 
 For logs on the server:
 
 ```bash
-cd ~/currency-monitor
+cd ~/apps/currency-monitor
 export IMAGE_TAG=$(basename "$(readlink -f current)")
 export IMAGE_NAMESPACE=$(cat current/image-namespace)
 sudo --preserve-env=IMAGE_TAG,IMAGE_NAMESPACE docker compose --env-file .env \
@@ -259,10 +259,10 @@ sudo --preserve-env=IMAGE_TAG,IMAGE_NAMESPACE docker compose --env-file .env \
 ### Manual rollback
 
 To restore a retained release on the VPS, set `old_sha` to its 40-character commit
-SHA from `~/currency-monitor/releases`, then run:
+SHA from `~/apps/currency-monitor/releases`, then run:
 
 ```bash
-cd ~/currency-monitor
+cd ~/apps/currency-monitor
 old_sha=REPLACE_WITH_PREVIOUS_RELEASE_SHA
 (
   flock -w 600 9
@@ -280,3 +280,12 @@ replaces containers and can briefly interrupt service. This single-VPS setup
 does not provide zero-downtime deployments or redundancy.
 
 [Back to the top ↑](#polski)
+
+## Układ katalogów aplikacji na VPS
+
+Produkcja używa `~/apps/currency-monitor/`. Folder `config/` zawiera plik `.env`
+i odnośniki do aktywnych konfiguracji Nginx i Compose; `.env` w korzeniu
+aplikacji jest odnośnikiem do `config/.env`. Wersje są w `releases/`, a `current`
+wskazuje bieżące wydanie. Foldery `backups/`, `images/` i `scripts/` grupują
+kopie i polecenia administracyjne. Obrazy z GHCR oraz wolumen PostgreSQL
+pozostają w magazynie Dockera. Lista obrazów: `scripts/list-images.sh`.

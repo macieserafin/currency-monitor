@@ -3,8 +3,8 @@ set -Eeuo pipefail
 umask 077
 
 # A release contains compose.prod.yml and ops/deploy.sh.
-release_dir="$(cd "$(dirname "$0")/.." && pwd)"
-app_root="$(cd "$release_dir/../.." && pwd)"
+release_dir="$(cd "$(dirname "$0")/.." && pwd -P)"
+app_root="$(cd "$release_dir/../.." && pwd -P)"
 image_tag="${1:?Pass the commit SHA}"
 registry_user="${2:?Pass the GitHub actor}"
 export IMAGE_NAMESPACE="${3:?Pass the GHCR namespace}"
